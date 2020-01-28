@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>ToDoom</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="style/style.css">
+        <script src="https://kit.fontawesome.com/8346038149.js" crossorigin="anonymous"></script>
+    </head>
+    <body onload="pageLoad()">
+        <div class="container">
+            <h1 style="display: inline;">To Doom</h1>
+            <p style="display: inline;">&nbsp; YOUR #1 TO DO LIST</p>
+            <p>&nbsp</p>
+            <h6 style="display: inline-block;" onclick="filterDoneToDos()">To do's done: <span id="doneToDosCountField" class="badge badge-success"></span></h6>
+            <div class="jumbotron">
+                <form id=toDoInputForm>
+                    <input type="text" id="toDoInput" class="form-control" placeholder="Add new to do ...">
+                    <a type="submit" id="addToDoBTN" class="fas fa-plus-circle fa-lg" onclick="addToDo()"></a>
+                </form>
+            </div>
+            <div id="toDosList">
+            </div>
+            <div class="footer">
+                &copy; Sven Stroomberg
+            </div>
+        </div>
+
+
+        <!-- Various scripts -->
+        <script src="https://chancejs.com/chance.min.js"></script>
+        <script
+            src="http://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="main.js"></script>
+    </body>
+</html>

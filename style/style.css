@@ -1,0 +1,119 @@
+.container {
+    padding: 20px 20%;
+}
+
+a {
+    color: grey;
+}
+
+.jumbotron {
+    margin: 20px 0px;
+    padding: 10px;
+}
+
+.form-control {
+    display: inline-block;
+    width: 90%;
+}
+
+#addToDoBTN {
+    float: right;
+    margin-top: 13px;
+    margin-right: 1%;
+    color: grey;
+}
+
+    #addToDoBTN:hover {
+        color: black;
+    }
+
+.card {
+    margin-bottom: 20px;
+    background-color: #e2e2e2;
+    border: 1px solid #e2e2e2;
+}
+
+.card-body {
+    padding-bottom: 0.25rem;
+}
+
+.toDoDesc {
+    display: inline-block;
+}
+
+.timestamp {
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    font-size: 10px;
+    color: grey;
+}
+
+.fa-check {
+    color: rgb(197, 197, 197);
+}
+
+    .fa-check:hover {
+        color: green;
+        cursor: pointer;
+    }
+
+    .todoCheck {
+        position: absolute;
+        right: 1%;
+        bottom: 40%;
+    }
+
+    .subtaskCheck {
+        position: absolute;
+        right: 13%;
+        margin-top: 0.5%
+    }
+
+        .subtaskCheck-checked {
+            color: green;
+        }
+
+        .subtaskCheck-checked:hover {
+            color: rgb(197, 197, 197);
+        }
+
+.editToDoForm {
+    display: inline-block;
+}
+
+.toDoTitle {
+    padding-top: 10px;
+}
+
+.subtask {
+    margin-bottom: 5px;
+    padding: 10px;
+    color: rgb(22, 22, 22);
+    background-color: white;
+    border-radius: 3px;
+    width: 90%;
+}
+
+    .subtask:hover {
+        color: white;
+        background-color: black;
+    }
+
+    .subtask-done {
+        text-decoration: line-through;
+        background-color: rgb(238, 238, 238);
+    }
+
+        .subtask-done:hover {
+            color: rgb(22, 22, 22);
+            background-color: rgb(238, 238, 238);
+        }
+
+h6 {
+    margin-bottom: 15px;
+}
+
+h5 {
+    font-size: 12px;
+}
