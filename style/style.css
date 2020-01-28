@@ -1,9 +1,74 @@
-.container {
-    padding: 20px 20%;
+h1 {
+    font-size: 28px;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+h5 {
+    font-size: 12px;
 }
 
 a {
-    color: grey;
+    color: white;
+}
+
+    a:hover {
+        color: white;
+    }
+
+/* Styling top bar */
+
+.toDoBar {
+    text-align: center;
+    background-image: linear-gradient(to right, #F7AB00, #F19100);
+    /* background-color: #F19100; */
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    color: white;
+    z-index: 1000;
+}
+
+.navLogo {
+    float: left;
+    margin: 2px 0 0 15px;
+    color: white;
+}
+
+.addTaskDiv {
+    width: 55%;
+    margin-top: 2px;
+    display: inline-block;
+}
+
+.addTaskForm {
+    border: none;
+}
+
+#addToDoBTN {
+    float: right;
+    margin-top: 13px;
+    margin-right: 1%;
+    color: rgb(255, 217, 159);
+}
+
+    #addToDoBTN:hover {
+        color: white;
+    }
+
+.toDoCount {
+    margin: 9px 15px 0 0;
+    float: right;
+}
+
+/* Styling page */
+
+.container {
+    padding: 20px 15%;
+    margin-top: 70px;
 }
 
 .jumbotron {
@@ -16,21 +81,10 @@ a {
     width: 90%;
 }
 
-#addToDoBTN {
-    float: right;
-    margin-top: 13px;
-    margin-right: 1%;
-    color: grey;
-}
-
-    #addToDoBTN:hover {
-        color: black;
-    }
-
 .card {
     margin-bottom: 20px;
-    background-color: #e2e2e2;
-    border: 1px solid #e2e2e2;
+    background-image: linear-gradient(to right, #F7AB00, #F19100);
+    border: none;
 }
 
 .card-body {
@@ -39,6 +93,20 @@ a {
 
 .toDoDesc {
     display: inline-block;
+    background-color: rgb(255, 255, 255, 0.2);
+    border-radius: 5px;
+    width: 95%;
+    padding: 10px;
+    margin: 5px 0 20px 0;
+}
+
+.descriptionText {
+    font-size: 14px;
+    color: white;
+}
+
+.addDescriptionLink {
+    margin-bottom: 50px;
 }
 
 .timestamp {
@@ -46,11 +114,11 @@ a {
     top: 8px;
     left: 20px;
     font-size: 10px;
-    color: grey;
+    color: white;
 }
 
 .fa-check {
-    color: rgb(197, 197, 197);
+    color: rgb(255, 221, 177);
 }
 
     .fa-check:hover {
@@ -60,13 +128,13 @@ a {
 
     .todoCheck {
         position: absolute;
-        right: 1%;
-        bottom: 40%;
+        right: 0.3%;
+        bottom: 43%;
     }
 
     .subtaskCheck {
         position: absolute;
-        right: 13%;
+        right: 7.5%;
         margin-top: 0.5%
     }
 
@@ -83,37 +151,32 @@ a {
 }
 
 .toDoTitle {
+    margin-bottom: 7px;
     padding-top: 10px;
+    color: white;
 }
 
 .subtask {
-    margin-bottom: 5px;
+    margin: 5px 0 5px 0;
     padding: 10px;
-    color: rgb(22, 22, 22);
+    color: rgb(229,84,15);
     background-color: white;
     border-radius: 3px;
-    width: 90%;
+    width: 95%;
 }
 
     .subtask:hover {
         color: white;
-        background-color: black;
+        background-color: rgb(229,84,15);
     }
 
     .subtask-done {
         text-decoration: line-through;
-        background-color: rgb(238, 238, 238);
+        color: white;
+        background-color: rgb(252, 211, 115);
     }
 
         .subtask-done:hover {
-            color: rgb(22, 22, 22);
-            background-color: rgb(238, 238, 238);
+            color: white;
+            background-color: rgb(252, 211, 115);
         }
-
-h6 {
-    margin-bottom: 15px;
-}
-
-h5 {
-    font-size: 12px;
-}

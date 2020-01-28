@@ -9,15 +9,17 @@ function pageLoad() {
 
 function addToDo(e) {
     // Main to do task
-    var toDoID = chance.guid();
-    var toDo = document.getElementById('toDoInput').value;
+    var toDoID = chance.guid()
+    var toDo = document.getElementById('toDoInput').value
+    var desc = ''
     var currentDate = getTimestamp()
-    var toDoStatus = 'Open';
-    var subtask = '';
+    var toDoStatus = 'Open'
+    var subtask = ''
 
     toDo = {
         id: toDoID,
         toDo: toDo,
+        description: desc,
         timestamp: currentDate,
         status: toDoStatus,
         subtasks: subtask
@@ -27,28 +29,36 @@ function addToDo(e) {
     if (localStorage.getItem('toDos') == null) {
         var toDos = [];
         toDos.push(toDo);
-        localStorage.setItem('toDos', JSON.stringify(toDos));
+        localStorage.setItem('toDos', JSON.stringify(toDos))
     } else {
-        var toDos = JSON.parse(localStorage.getItem('toDos'));
-        toDos.push(toDo);
-        localStorage.setItem('toDos', JSON.stringify(toDos));
-    };
+        var toDos = JSON.parse(localStorage.getItem('toDos'))
+        toDos.push(toDo)
+        localStorage.setItem('toDos', JSON.stringify(toDos))
+    }
 
-    document.getElementById('toDoInputForm').reset();
+    document.getElementById('toDoInputForm').reset()
     fetchToDos()
     //e.preventDefault();
-};
+}
 
 function fetchToDos() {
-    var toDos = JSON.parse(localStorage.getItem('toDos'));
-    var toDosList = document.getElementById('toDosList');
+    var toDos = JSON.parse(localStorage.getItem('toDos'))
+    var toDosList = document.getElementById('toDosList')
 
-    toDosList.innerHTML = '';
+    toDosList.innerHTML = ''
 
     for (var i = 0 ; i < toDos.length ; i++) {
-        var id = toDos[i].id;
-        var toDo = toDos[i].toDo;
-        var timestamp = toDos[i].timestamp;
+        var id = toDos[i].id
+        var toDo = toDos[i].toDo
+        var toDoDesc = toDos[i].description
+        var timestamp = toDos[i].timestamp
+        var addDescLink = ''
+        var descStyle = ''
+        if (toDos[i].description == '') {
+            descStyle = 'style="display: none"'
+        } else {
+            addDescLink = 'style="display: none"'
+        }
 
         if (toDos[i].status == 'Open') {
             toDosList.innerHTML += '<div class="card">' +
@@ -56,7 +66,12 @@ function fetchToDos() {
                                             '<i class="fas fa-check todoCheck" onclick="doneToDo(\''+id+'\')">&nbsp;&nbsp;&nbsp;&nbsp;</i>' +
                                             '<h6 class="timestamp">' + timestamp + '</h6>' +
                                             '<div id=\''+id+'\'>' +
-                                                '<h6 class="toDoTitle" onclick="editToDo(\''+id+'\')">' + toDo + '</h6>' +
+                                                '<h4 class="toDoTitle" onclick="editToDo(\''+id+'\')">' + toDo + '</h4>' +
+                                            '</div>' +
+                                            '<div id=toDoDescription'+id+' class="toDoDesc" ' + descStyle + ' onclick="editDescription(\''+id+'\')"><p class="descriptionText">' + toDoDesc + '</p></div>' +
+                                            '<a href="#" id="addDescriptionLink'+id+'" ' + addDescLink + ' class="addDescriptionLink" onclick="addDescriptionLayout(\''+id+'\')"><small>Add description ...</small></a>' +
+                                            '<div id="addDescriptionInput'+id+'" style="display: none">' +
+                                                '<textarea id="descriptionInput'+id+'" type=text class="form-control" placeholder="Add task description ..."></textarea>' +
                                             '</div>' +
                                             '<div id="subtaskList"></div>' +
                                             '<div id="addSubtaskInput'+id+'" style="display: none">' +
@@ -98,48 +113,48 @@ function fetchToDos() {
 
 // ------------------------------------- TODO FUNCTIONS -------------------------------------
 function editToDo(id) {
-    var toDos = JSON.parse(localStorage.getItem('toDos'));
-    var toDoTitleText = document.getElementById(id);
+    var toDos = JSON.parse(localStorage.getItem('toDos'))
+    var toDoTitleText = document.getElementById(id)
 
     // Retrieve JSON values of clicked to do
     for (var i = 0 ; i < toDos.length ; i++) {
         if (toDos[i].id == id) {
-            var toDoTitleJSON = toDos[i].toDo;
+            var toDoTitleJSON = toDos[i].toDo
 
-            toDoTitleText.innerHTML = '<input type="text" id="editToDoTitle" class="form-control editToDoForm" value="'+toDoTitleJSON+'">&nbsp;</input>';
-        };
-    };
+            toDoTitleText.innerHTML = '<input type="text" id="editToDoTitle" class="form-control editToDoForm" value="'+toDoTitleJSON+'">&nbsp;</input>'
+        }
+    }
 
-    var newToDoTitleText = document.getElementById('editToDoTitle');
-    newToDoTitleText.select();
+    var newToDoTitleText = document.getElementById('editToDoTitle')
+    newToDoTitleText.select()
     // Save on enter
     newToDoTitleText.addEventListener("keyup", function (){
         if (event.key === "Enter") {
-            saveEditToDo(id);
-        };
-    });
+            saveEditToDo(id)
+        }
+    })
     // Save on click outside of textfield
     newToDoTitleText.addEventListener("blur", function () {
-        saveEditToDo(id);
-    });
-};
+        saveEditToDo(id)
+    })
+}
 
 function saveEditToDo(id) {
-    var toDos = JSON.parse(localStorage.getItem('toDos'));
-    var newToDoTitleText = document.getElementById('editToDoTitle');
-    var toDoTitleText = document.getElementById(id);
+    var toDos = JSON.parse(localStorage.getItem('toDos'))
+    var newToDoText = document.getElementById('editToDoTitle')
+    var toDoTitleText = document.getElementById(id)
     
     for (var i = 0 ; i < toDos.length ; i++) {
         if (toDos[i].id == id) {
-            toDos[i].toDo = newToDoTitleText.value;
-            var toDo = toDos[i].toDo;
+            toDos[i].toDo = newToDoText.value
+            var toDo = toDos[i].toDo
 
-            toDoTitleText.innerHTML = '<h6 class="toDoTitle" onclick="editToDo(\''+id+'\')">' + toDo + '</h6>';
-        };
-    };
+            toDoTitleText.innerHTML = '<h4 class="toDoTitle" onclick="editToDo(\''+id+'\')">' + toDo + '</h4>'
+        }
+    }
 
-    localStorage.setItem('toDos', JSON.stringify(toDos));
-};
+    localStorage.setItem('toDos', JSON.stringify(toDos))
+}
 
 function doneToDo(id) {
     var toDos = JSON.parse(localStorage.getItem('toDos'));
@@ -207,32 +222,18 @@ function addSubtaskLayout(id) {
     };
 };
 
-function fetchSubtasks() {
-    var subtaskList = document.getElementById('subtaskList');
-
-    for (var i = 0 ; i < toDos.length ; i++) {
-        for (var s = 0 ; s < toDos[i].subtasks.length ; s++) {
-            var subtaskDesc = toDos[i].subtasks[s].desc
-            // Add subtask to task
-            subtaskList.innerHTML += '<div class="subtask">' +
-                                        '<h5>' + subtaskDesc + '</h5>' +
-                                     '</div';
-        };
-    };
-};
-
 function addSubtask(id) {
     var toDos = JSON.parse(localStorage.getItem('toDos'));
 
     for (var i = 0 ; i < toDos.length ; i++) {
-        var taskDesc = document.getElementById('subtaskInput' + id).value;
+        var taskDesc = document.getElementById('subtaskInput' + id).value
 
         if (toDos[i].id == id) {
             // Add the subtask
             // Subtask
-            var taskID = chance.guid();
-            var taskStatus = 'Open';
-            var subtasks = toDos[i].toDo;
+            var taskID = chance.guid()
+            var taskStatus = 'Open'
+            var subtasks = toDos[i].toDo
             console.log(subtasks)
 
             var newSubtaskValue = {
@@ -242,31 +243,29 @@ function addSubtask(id) {
             }
 
             if (toDos[i].subtasks == '') {
-                var toDos = JSON.parse(localStorage.getItem('toDos'));
-                var subs = toDos[i].subtasks = [];
+                var toDos = JSON.parse(localStorage.getItem('toDos'))
+                var subs = toDos[i].subtasks = []
 
-                subs.push(newSubtaskValue);
-                localStorage.setItem('toDos', JSON.stringify(toDos));
+                subs.push(newSubtaskValue)
+                localStorage.setItem('toDos', JSON.stringify(toDos))
             } else {
-                var toDos = JSON.parse(localStorage.getItem('toDos'));
-                // subs.push(newSubtaskValue)
-                // localStorage.setItem('toDos', JSON.stringify(toDos));
+                var toDos = JSON.parse(localStorage.getItem('toDos'))
                 
                 for (var s = 0 ; s < toDos.length ; s++) {
                     if (toDos[s].id == id) {
-                        subsList = toDos[s].subtasks;
-                        console.log(subsList);
+                        subsList = toDos[s].subtasks
+                        console.log(subsList)
                         subsList.push(newSubtaskValue)
-                        localStorage.setItem('toDos', JSON.stringify(toDos));
+                        localStorage.setItem('toDos', JSON.stringify(toDos))
                     };
                 };
             };
 
             // Change layout
-            var subtaskInputField = document.getElementById('addSubtaskInput' + id);
+            var subtaskInputField = document.getElementById('addSubtaskInput' + id)
 
             // Reset input field
-            subtaskInputField.style.display = "none";
+            subtaskInputField.style.display = "none"
         };
     };
 
@@ -301,6 +300,104 @@ function doneSubtask(id) {
 
 
 // ------------------------------------- END SUBTASKS -------------------------------------
+
+// ------------------------------------- DESCRIPTION --------------------------------------
+
+function addDescriptionLayout(id) {
+    var toDos = JSON.parse(localStorage.getItem('toDos'))
+
+    for (var i = 0 ; i < toDos.length ; i++) {
+        if (toDos[i].id == id) {
+
+            // Hide 'Add description ...' field
+            var addDescriptionLink = document.getElementById('addDescriptionLink' + id)
+            addDescriptionLink.style.display = "none"
+
+            // Show description input field
+            var descriptionInputField = document.getElementById('addDescriptionInput' + id)
+            descriptionInputField.style.display = "inline"
+
+            // Change subtask layout on save
+            var descriptionDesc = document.getElementById('descriptionInput' + id);
+            descriptionDesc.select();
+
+            // When pressing enter
+            descriptionDesc.addEventListener("keyup", function (){
+                if (event.key === "Enter") {
+                    addDescription(id);
+                };
+            });
+
+            // Save on click outside of textfield
+            descriptionDesc.addEventListener("blur", function () {
+                addDescription(id);
+            });
+        }
+    }
+}
+
+function addDescription(id) {
+    var toDos = JSON.parse(localStorage.getItem('toDos'));
+    
+    for (var i = 0 ; i < toDos.length ; i++) {
+        var taskDesc = document.getElementById('descriptionInput' + id).value
+
+        if (toDos[i].id == id) {
+            toDos[i].description = taskDesc
+        }
+    }
+
+    localStorage.setItem('toDos', JSON.stringify(toDos))
+
+    fetchToDos()
+}
+
+function editDescription(id) {
+    var toDos = JSON.parse(localStorage.getItem('toDos'))
+    var toDoDescriptionText = document.getElementById('toDoDescription' + id)
+
+    // Retrieve JSON values of clicked to do and place in editable textarea
+    for (var i = 0 ; i < toDos.length ; i++) {
+        if (toDos[i].id == id) {
+            var toDoTitleJSON = toDos[i].description
+
+            toDoDescriptionText.innerHTML = '<textarea type="text" id="editDescription" class="form-control editToDoForm">'+toDoTitleJSON+'</textarea>'
+        }
+    }
+
+    var newDescriptionText = document.getElementById('editDescription')
+    newDescriptionText.select()
+    // Save on enter
+    newDescriptionText.addEventListener("keyup", function (){
+        if (event.key === "Enter") {
+            saveEditDescription(id)
+        }
+    })
+    // Save on click outside of textfield
+    newDescriptionText.addEventListener("blur", function () {
+        saveEditDescription(id)
+    })
+}
+
+function saveEditDescription(id) {
+    var toDos = JSON.parse(localStorage.getItem('toDos'))
+    var newDescriptionText = document.getElementById('editDescription')
+    var toDoDescriptionText = document.getElementById('toDoDescription' + id)
+    
+    for (var i = 0 ; i < toDos.length ; i++) {
+        if (toDos[i].id == id) {
+            toDos[i].description = newDescriptionText.value
+            var description = toDos[i].description
+
+            toDoDescriptionText.innerHTML = '<p class="descriptionText">' + description + '</p>'
+        }
+    }
+
+    localStorage.setItem('toDos', JSON.stringify(toDos))
+}
+
+// ----------------------------------- END DESCRIPTION ------------------------------------
+
 
 // ------------------------------------- ADDITIONAL FUNCTIONS -------------------------------------
 
